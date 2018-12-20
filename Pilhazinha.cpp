@@ -20,26 +20,22 @@ typedef struct Reg{
 	Reg *prox;
 } No;
 
-typedef struct tipoPilha
-{
-	No * Topo;
+typedef struct pilha{
+	No *Topo;
 	int tamanho;
-} Pilha;
+}Pilha;
 
-Pilha *iniciaPilha(Pilha *PL)
-{
+Pilha *iniciaPilha(Pilha *PL){
 	PL->Topo = NULL;
 	PL->tamanho = 0;
 	return PL;
 }
 
-int pilhaVazia(Pilha *PL)
-{
+int P_Vazia(Pilha *PL){
 	return(PL->Topo == NULL);
 }
 
-Pilha *empilhar(Pilha *PL, int k)
-{
+Pilha *empilhaPilha(Pilha *PL, int k){
 	No *novo;
 	novo = new No;
 	novo->info = k;
@@ -49,14 +45,12 @@ Pilha *empilhar(Pilha *PL, int k)
 	return PL;
 }
 
-Pilha *desempilhar(Pilha *PL)
-{
+Pilha *desempilhar(Pilha *PL){
 	No *aux;
 	int sai;
 	if (pilhaVazia(PL))
 		cout << "\nA PILHA ESTA VAZIA!" << endl;
-	else
-	{
+	else{
 		aux = PL->Topo;
 		PL->Topo = aux->prox;
 		sai = aux->info;
@@ -67,16 +61,14 @@ Pilha *desempilhar(Pilha *PL)
 	return PL;
 }
 
-void imprimirPilha(Pilha *PL)
-{
+void imprimirPilha(Pilha *PL){
 	No *copia;
 	copia = PL->Topo;
 	int cont = 1;
 	if (pilhaVazia(PL))
 		cout << "PILHA VAZIA!" << endl;
 	else
-		while (copia != NULL)
-		{
+		while (copia != NULL){
 			cout << "PILHA[" << cont << "] = " << copia->info << endl;
 			copia = copia->prox;
 			cont++;
@@ -84,20 +76,17 @@ void imprimirPilha(Pilha *PL)
 }
 
 
-int GeraValAleatorio(int val[], int QuantNum, int lim)
-{
+int GeraValAleatorio(int val[], int QuantNum, int lim){
 	int N;
 	srand(time(NULL));
-	for (int i = 0; i < QuantNum; i++)
-	{
+	for (int i = 0; i < QuantNum; i++){
 		val[i] = rand() % lim;
 		N = val[i];
 	}
 	return N;
 }
 
-int main()
-{
+int main(){
 	int x;
 	int num[100];
 	Pilha *PL;
@@ -105,11 +94,9 @@ int main()
 	int v = 10;
 	iniciaPilha(PL);
 
-	while (v != 0)
-	{	
+	while (v != 0){	
 		while(PL->tamanho<=19){
-		for (int i = 0; i < 1; i++) 
-		{   
+		for (int i = 0; i < 1; i++) {   
 
 			sleep_for(seconds(3));
 			x = GeraValAleatorio(num, 1, 100);
