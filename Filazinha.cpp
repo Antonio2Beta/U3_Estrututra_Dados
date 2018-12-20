@@ -3,92 +3,81 @@
   Professor: Lima Júnior
   Alunos: Erick Eduardo
           Antonio Vicente
-  #include "pch.h"
+*/
+#include "pch.h"
 #include <iostream>
-#include <stdio.h>      /* printf, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono>         // std::chrono::seconds
+#include <stdio.h>     
+#include <stdlib.h>    
+#include <thread>      
+#include <chrono>      
 
 using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
-typedef struct Reg
-{
+typedef struct Reg{
 	int info;
 	Reg *prox;
-} No;
+}No;
 
-typedef struct fila
-{
-	No *primeiro;
-	No *ultimo;
+typedef struct fila{
+	No *inicio;
+	No *final;
 	int tam;
-} Fila;
+}Fila;
 
 
-void inicializaFila(Fila *f)
-{
-	f->primeiro = NULL;
-	f->ultimo = NULL;
+void inicializaFila(Fila *f){
+	f->inicio = NULL;
+	f->final = NULL;
 }
 
-Fila *inserirFila(Fila *f, int k)
-{
+Fila *inserirFila(Fila *f, int k){
 	No *novo;
 	novo = new No;
 	novo->info = k;
 
-	if (f->primeiro == NULL) {
-		f->primeiro = novo;
-		f->ultimo = novo;
+	if (f->inicio == NULL) {
+		f->inicio = novo;
+		f->final = novo;
 		novo->prox = NULL;
 		f->tam++;
 	}
-	else
-	{
-		novo->prox = f->ultimo->prox;
-		f->ultimo->prox = novo;
-		f->ultimo = novo;
+	else{
+		novo->prox = f->final->prox;
+		f->final->prox = novo;
+		f->final = novo;
 	}
 	return f;
 }
 
-int FilaVazia(Fila *f)
-{
-	return f->primeiro == NULL; // Se o inicio apontar para NULL, entao Fila est� vazia
+int F_Vazia(Fila *f){
+	return f->inicio == NULL; 
 }
 
-Fila *removerFila(Fila *f)
-{
+Fila *removerFila(Fila *f){
 	No *aux;
-	aux = f->primeiro;
+	aux = f->inicio;
 
 	if (aux == NULL)
-		cout << "\nFila vazia!" << endl;
-	else
-	{
-		f->primeiro = aux->prox;
+		cout << "\n A fila está vazia!" << endl;
+	else{
+		f->inicio = aux->prox;
 		free(aux);
 		f->tam--;
 	}
 	return f;
 }
 
-void mostrarFila(Fila *f)
-{
+void mostrarFila(Fila *f){
 	No *copia;
-	copia = f->primeiro;
+	copia = f->inicio;
 	int cont = 1;
-	if (copia == NULL)
-	{
-		cout << "\nFila vazia!" << endl;
+	if (copia == NULL){
+		cout << "\n A fila está vazia!" << endl;
 	}
-	else
-	{
-		while (copia != NULL)
-		{
+	else{
+		while (copia != NULL){
 			cout << "Fila[" << cont << "]= " << copia->info << endl;
 			copia = copia->prox;
 			cont++;
@@ -97,20 +86,17 @@ void mostrarFila(Fila *f)
 
 }
 
-int GeraValAleatorio(int val[], int QuantNum, int lim)
-{
+int GeraValAleatorio(int val[], int QuantNum, int lim){
 	int N;
 	srand(time(NULL));
-	for (int i = 0; i < QuantNum; i++)
-	{
+	for (int i = 0; i < QuantNum; i++){
 		val[i] = rand() % lim;
 		N = val[i];
 	}
 	return N;
 }
 
-int main()
-{
+int main(){
 	int x;
 	int num[100];
 	Fila *F1;
