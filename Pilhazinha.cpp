@@ -34,7 +34,7 @@ int P_Vazia(Pilha *PL){
 	return(PL->Topo == NULL);
 }
 
-Pilha *empilhaPilha(Pilha *PL, int k){
+Pilha *adicionar(Pilha *PL, int k){
 	No *novo;
 	novo = new No;
 	novo->info = k;
@@ -44,16 +44,16 @@ Pilha *empilhaPilha(Pilha *PL, int k){
 	return PL;
 }
 
-Pilha *desempilhar(Pilha *PL){
+Pilha *remover(Pilha *PL){
 	No *aux;
 	int sai;
-	if (pilhaVazia(PL))
-		cout << "\nA PILHA ESTA VAZIA!" << endl;
+	if (P_Vazia(PL))
+		cout << "\nA pilha está vazia!" << endl;
 	else{
 		aux = PL->Topo;
 		PL->Topo = aux->prox;
 		sai = aux->info;
-		cout << "\n" << sai << " Retirado da pilha! " << endl;
+		cout << "\n" << sai << " Removido da pilha! " << endl;
 		PL->tamanho--;
 		delete aux;
 	}
@@ -64,18 +64,18 @@ void imprimirPilha(Pilha *PL){
 	No *copia;
 	copia = PL->Topo;
 	int cont = 1;
-	if (pilhaVazia(PL))
-		cout << "PILHA VAZIA!" << endl;
+	if (P_Vazia(PL))
+		cout << "A pilha está vazia!" << endl;
 	else
 		while (copia != NULL){
-			cout << "PILHA[" << cont << "] = " << copia->info << endl;
+			cout << "Pilha[" << cont << "] = " << copia->info << endl;
 			copia = copia->prox;
 			cont++;
 		}
 }
 
 
-int GeraValAleatorio(int val[], int QuantNum, int lim){
+int GeraValorAleatorio(int val[], int QuantNum, int lim){
 	int N;
 	srand(time(NULL));
 	for (int i = 0; i < QuantNum; i++){
@@ -98,15 +98,15 @@ int main(){
 		for (int i = 0; i < 1; i++) {   
 
 			sleep_for(seconds(3));
-			x = GeraValAleatorio(num, 1, 100);
-			empilhar(PL, x);
+			x = GeraValorAleatorio(num, 1, 100);
+			adicionar(PL, x);
 			cout << "Inserido na Pilha" << endl;
 			imprimirPilha(PL);
 			cout << endl;
 		}
 		}
 		sleep_for(seconds(2));
-		desempilhar(PL);
+		remover(PL);
 		imprimirPilha(PL);
 		cout << endl;
 
