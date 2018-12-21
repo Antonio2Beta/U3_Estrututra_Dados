@@ -3,7 +3,6 @@
    Alunos: Antonio Vicente
            Erick Eduardo
 */
-#include "pch.h"
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
