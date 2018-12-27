@@ -22,14 +22,14 @@ typedef struct Reg{
 
 typedef struct fila{
 	No *inicio;
-	No *final;
+	No *fim;
 	int tam;
 }Fila;
 
 
 void inicializaFila(Fila *f){
 	f->inicio = NULL;
-	f->final = NULL;
+	f->fim = NULL;
 }
 
 Fila *inserirFila(Fila *f, int k){
@@ -39,14 +39,14 @@ Fila *inserirFila(Fila *f, int k){
 
 	if (f->inicio == NULL) {
 		f->inicio = novo;
-		f->final = novo;
+		f->fim = novo;
 		novo->prox = NULL;
 		f->tam++;
 	}
 	else{
 		novo->prox = f->final->prox;
-		f->final->prox = novo;
-		f->final = novo;
+		f->fim->prox = novo;
+		f->fim = novo;
 	}
 	return f;
 }
